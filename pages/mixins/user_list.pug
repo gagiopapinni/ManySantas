@@ -1,0 +1,11 @@
+       
+mixin userList(list)   
+      table.table
+        tbody 
+          each item in list
+           if item.name 
+             tr       
+               td 
+                 p.font-weight-bold #{ item.name }        
+            
+             

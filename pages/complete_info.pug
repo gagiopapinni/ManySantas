@@ -1,0 +1,20 @@
+include ./mixins/data_form
+
+doctype html
+html
+head
+  meta(content='text/html' charset='UTF-8')
+  meta(name="viewport" content="width=device-width, initial-scale=1")
+  title= title
+  include common_styles
+  include common_scripts
+  
+body
+ .cotainer-fluid
+  .row
+   
+   .col-12.col-sm-6.mx-auto
+      div.text-center.border.rounded.mx-auto(width='300px' style='padding:20px;margin-top:30px;')
+        h5= description
+        p.text-danger= notice
+        +data_form('name surname')(action='/'+ giftbox_id +'.'+ user_id+'/complete-info' method='post')       

@@ -1,0 +1,126 @@
+
+include ./mixins/modal
+include ./mixins/data_form 
+include ./mixins/user_list
+include ./mixins/user_list_extended 
+
+- var name = user.name.split(' ')[0];
+- var surname = user.name.split(' ')[1];
+- var isCreator = user.id[0]==='0';
+- var isShuffled = !!receiver;
+     
+doctype html
+html
+head
+  meta(content='text/html' charset='UTF-8')
+  meta(name="viewport" 
+       content="width=device-width, initial-scale=1")
+  title= title
+  include common_styles
+  include common_scripts
+  script(src='/js/user.js')
+body
+  .container
+     .row
+       .col
+         p.font-weight-bold.text-center.mt-5(style='font-size:3em;') 🎅
+         h2.font-weight-bold.text-center.mt-2 #{name} #{surname}
+         h5.text-muted.text-center= info
+     .row
+       .col
+         form(action='/'+ gbox.id +'-'+ user.id+'/update-letter' method='post')
+             textarea.form-control(id="letter" 
+                                   rows="6"
+                                   name='letter'
+                                   minlength='50' maxlength='350'
+                                   placeholder= letter_placeholder
+                                   required='true') #{ user.letter }
+             small.text-muted.ml-1(id='letterSizeCounter')= user.letter.length +'/350'
+             div.collapse.mb-3.mt-2(id='letterSend') 
+                button.btn.btn-danger(type='submit' )= letter_send_button
+
+         if isShuffled 
+             div.text-center.mt-5
+               p.font-weight-bold
+                  a #{ name+", "+user_instructions+" " }
+                  span.font-italic #{ receiver.name }
+                  a #{ "! "+receiver_letter_prefix } 
+               p.font-italic.mt-2 #{ receiver.letter }         
+
+         if isCreator 
+             div.text-center.mtb-2
+               if !isShuffled 
+                  button.btn.btn-success.btn-lg.mtb-5(type='button' 
+                                             data-toggle="modal"
+                                             data-target="#shuffle_modal")= shuffle_button
+
+
+         div.text-center.mt-5.table-responsive(id='user-list')
+             h5.mt-4.mb-2.font-weight-bold= user_table_title
+             if isCreator 
+               +userListExtended(gbox.users)
+               if !isShuffled 
+                  button.btn.btn-secondary.mt-3(data-toggle="modal" 
+                                                data-target="#invite_modal" 
+                                                style='border-radius:50%;')
+                     span.font-weight-bold(color='white') +
+             else
+               +userList(gbox.users)
+          
+         if( isCreator ) 
+           +modal('invite_modal',invite_modal_title)
+             p.text-muted= invite_modal_description
+             +data_form('email')(action='/'+gbox.id+'.'+ user.id +'/invite-user' 
+                                 method='post')
+
+           +modal('shuffle_modal',shuffle_modal_title)
+             div.text-center
+                p.text-muted= shuffle_modal_description
+                button.btn.btn-success.mt-4(type='button' 
+                                            id='shuffle'  
+                                            data-toggle="modal" 
+                                            data-target="#shuffle_modal")= shuffle_modal_button
+
+           +modal('delete_gbox_modal',delete_giftbox_modal_title)
+             div.text-center
+                p.text-weight-bold= delete_giftbox_modal_description
+                button.btn.btn-danger.mt-4(type='button' 
+                                           id='deleteGiftbox' 
+                                           data-toggle="modal" 
+                                           data-target="#delete_gbox_modal")= delete_giftbox_modal_button
+
+        
+
+         div.fade.alert-wrap(id='delete-giftbox-error')
+             p.alert.alert-danger= error.delete_giftbox
+
+         div.fade.alert-wrap(id='delete-user-error')
+             p.alert.alert-danger= error.delete_user
+
+         div.fade.alert-wrap(id='shuffle-error')
+             p.alert.alert-danger= error.shuffle
+
+         div.text-center.mt-5
+             p.text-muted
+               a(data-toggle='modal' 
+                 data-target='#delete_gbox_modal' 
+                 style="cursor: pointer;")= giftbox_delete_link 
+           
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,35 @@
+
+mixin data_form(options)
+    - var ops = options.split(' ')
+    form(action=attributes.action method=attributes.method id=attributes.id class=attributes.class)
+     div.form-group
+       if(ops.includes('name'))
+        .form-group
+          label= name_label
+          input.form-control(type='text'
+                             name="name" 
+                             placeholder= name_placeholder 
+                             maxlength='25'  
+                             required='true')
+      
+       if(ops.includes('surname'))
+        .form-group
+          label= surname_label
+          input.form-control(type='text'
+                             name="surname"  
+                             placeholder=surname_placeholder 
+                             maxlength='25'
+                             required='true')      
+
+       if(ops.includes('email'))
+        .form-group
+          label= email_label
+          input.form-control(type="email" 
+                             name="email"
+                             placeholder= email_placeholder
+                             maxlength='64'
+                             required='true')
+
+   
+     button.btn.btn-primary(type="submit")= submit_button
+

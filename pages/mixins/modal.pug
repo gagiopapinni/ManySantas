@@ -1,0 +1,13 @@
+
+mixin modal(id,title)
+    div.modal.fade.pb-5(tabindex="-1" role="dialog" id=id)
+           div.modal-dialog(role="document")
+             div.modal-content
+               div.modal-header
+                  h5.modal-title= title
+                  button.close( type="button"  data-dismiss="modal" aria-label="Close")
+                    span(aria-hidden="true") &times;
+               div.modal-body
+                  if block
+                    block 
+             

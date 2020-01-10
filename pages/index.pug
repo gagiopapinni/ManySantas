@@ -1,0 +1,37 @@
+include ./mixins/modal
+include ./mixins/data_form
+
+doctype html
+html
+head
+  meta(content='text/html' charset='UTF-8')
+  meta(name="viewport" content="width=device-width, initial-scale=1")
+  title= title
+  include common_styles
+  include common_scripts
+  script(src="/js/index.js")
+  link(rel="stylesheet" type="text/css" href="/css/index.css")
+body
+ .container    
+   .row
+    .col
+      div(id='logo_wrap')
+        div.mt-0.p-2.pt-4.text-left(id='logo')
+         h3.font-weight-bold.mb-0 MANYSANTAS.COM
+         h5.text-muted A SECRET SANTA SERVICE
+   .row
+    .col.vertical-center     
+      div.mx-auto.text-center.mb-3
+        div.text-center(style='line-height:50%;color:white;')
+          each item, index in actions
+            h4.font-weight-bold.fade(id= 'item'+(index+1))= item
+        if info_link_href 
+          h4
+           a.mb-2.mt-4.font-weight-bold(href= info_link_href)= info_link_text                                                 
+        button.btn.btn-danger.btn-lg.mt-5( type='button' data-toggle="modal" data-target="#create_modal")= start_button
+
+      +modal('create_modal',create_modal_title )
+        p.text-muted= data_input_invitation
+        +data_form('name surname email')(action='/create' method='post')
+      
+

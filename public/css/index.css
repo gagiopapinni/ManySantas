@@ -1,0 +1,17 @@
+body{
+   background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('../img/bg.jpg');
+   height:100%;
+}
+#logo_wrap{
+   position:fixed;
+   
+   top:0;
+   left:15%;
+}
+#logo{
+   display:inline-block;
+   background-color:#ffffff;
+   color:black;
+   line-height:30%;
+}
+a, a:hover, a:active, a:visited { color: white; }

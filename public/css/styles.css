@@ -1,0 +1,21 @@
+.col,.row{
+  
+  margin-right:0;
+  margin-left:0;
+
+}
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}
+.alert-wrap{
+
+   position:fixed;
+   width:300px;
+   top:20px;
+   left:50%;
+   margin-left:-150px;
+}

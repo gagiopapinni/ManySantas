@@ -1,0 +1,34 @@
+
+mixin userListExtended(list)
+      table.table
+        thead
+         tr
+           for header in user_table_th
+             th= header
+        tbody 
+          each item in list
+            tr       
+              td(style='line-height:1em;')
+                if item.name
+                  p.font-weight-bold #{ item.name }
+                  small.text-muted #{ item.email }
+                else
+                  p.font-weight-bold #{ item.email }
+                if !user.invitation_sent 
+                  small.text-danger= invitation_not_sent
+              td(style='line-height:1em;')
+                if !item.name  
+                  p= invited
+                else
+                  p.text-success= invitation_accepted
+                  if item.letter
+                    p.text-success= letter_completed
+                  else
+                    p.text-danger= letter_not_completed
+              td
+                span 
+                  - var disabled = item.email===user.email || isShuffled;
+                  button.btn.btn-danger.btn-sm.font-weight-bold.user-delete(type='button' 
+                                                                            email=item.email 
+                                                                            disabled=disabled ) ✕
+

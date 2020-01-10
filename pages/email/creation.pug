@@ -1,0 +1,8 @@
+extends ./main
+
+block message
+   h5(style='font-size:2em;') Здравствуйте,#{ name }! Вы только что создали новогоднюю группу обмена подарками на manysantas.com! Получите доступ к вашей странице по ссылке ниже, чтобы пригласить участников, а также написать письмо Санте!
+   h5.mt-4.text-muted.text-italic(style='font-size:1.5em;') Внимание! Данное письмо является единственным способом получения доступа к вашей странице: не удаляйте и не передавайте его никому!
+   a.btn.btn-primary(href=link style='color:white;font-size:1.8em;display:block;') Войти
+   small.text-muted(style='display:block;') #{ link }
+
