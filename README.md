@@ -1,0 +1,2 @@
+# ManySantas
+Secret Santa Service
