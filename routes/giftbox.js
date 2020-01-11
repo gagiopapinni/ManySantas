@@ -11,25 +11,29 @@ exports.shuffle = async function (req,res,next){
           assert.equal(req.user.id[0], '0');
 
           let users = [],
-              matchup = [];
+              id_pool = [];
 
           for(let u of req.gbox.users)
-              if(u.name) users.push(u);//only them who accepted invitation
+              if(u.name){//only them who accepted invitation
+                users.push(u);
+                id_pool.push(u.id);
+              }
           assert(users.length > 1);
           req.gbox.users = users;
 
-          for(let i =0;i<users.length;i++) matchup.push(i);
-          for(let i=0;i<200;i++){
-             let a = Math.round(Math.random()*(users.length-1)),
-                 b = Math.round(Math.random()*(users.length-1));
-             let temp = matchup[a];
-             matchup[a] = matchup[b];
-             matchup[b] = temp;
+          for(let u of users){
+               let found;
+               do{
+                   const random_idx = Math.round(Math.random()*(id_pool.length-1));
+                   
+                   found = (u.is != id_pool[random_idx]);
+                   if(found){
+                      u.receiver_id = id_pool[random_idx];
+                      id_pool.splice(random_idx,1);
+                   }
+               }while(!found);
           }
-          for(let i =0;i<users.length-1;i++)
-             users[matchup[i]].receiver_id = users[matchup[i+1]].id;
-          users[matchup[users.length-1]].receiver_id = users[matchup[0]].id;
- 
+           
           let r = await req.db.collection('giftboxes').replaceOne({id:req.gbox.id},req.gbox);
           assert.equal(r.matchedCount,1);
           assert.equal(r.modifiedCount,1); 
@@ -49,7 +53,7 @@ exports.delete = async function (req,res,next){
 
          res.sendStatus(200);
        }catch(e){
-         console.log(err.stack);
+         console.log(e.stack);
          res.sendStatus(404);
        }      
 }
