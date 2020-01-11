@@ -28,7 +28,7 @@ body
          h5.text-muted.text-center= info
      .row
        .col
-         form(action='/'+ gbox.id +'-'+ user.id+'/update-letter' method='post')
+         form(action='/'+ gbox.id +'.'+ user.id+'/update-letter' method='post')
              textarea.form-control(id="letter" 
                                    rows="6"
                                    name='letter'
@@ -85,22 +85,22 @@ body
              div.text-center
                 p.text-weight-bold= delete_giftbox_modal_description
                 button.btn.btn-danger.mt-4(type='button' 
-                                           id='deleteGiftbox' 
+                                           id='delete_giftbox' 
                                            data-toggle="modal" 
                                            data-target="#delete_gbox_modal")= delete_giftbox_modal_button
 
         
 
-         div.fade.alert-wrap(id='delete-giftbox-error')
+           div.fade.alert-wrap(id='delete-giftbox-error')
              p.alert.alert-danger= error.delete_giftbox
 
-         div.fade.alert-wrap(id='delete-user-error')
+           div.fade.alert-wrap(id='delete-user-error')
              p.alert.alert-danger= error.delete_user
 
-         div.fade.alert-wrap(id='shuffle-error')
+           div.fade.alert-wrap(id='shuffle-error')
              p.alert.alert-danger= error.shuffle
 
-         div.text-center.mt-5
+           div.text-center.mt-5
              p.text-muted
                a(data-toggle='modal' 
                  data-target='#delete_gbox_modal' 

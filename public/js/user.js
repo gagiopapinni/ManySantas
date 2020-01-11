@@ -4,7 +4,7 @@ $(document).ready(function(){
   $('button.user-delete').on('click', deleteUser );
   $('#letter').on('input', onLetterInput);
   $('#shuffle').on('click', shuffle);
-  $('#deleteGiftbox').on('click', deleteGbox);
+  $('#delete_giftbox').on('click', deleteGbox);
 
 })
 
