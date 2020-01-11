@@ -46,7 +46,7 @@ exports.invite = async function (req,res,next){
           assert.equal(r.matchedCount,1);
           assert.equal(r.modifiedCount,1);
 
-          r = await mail.send(new_user.email,'manysantas.com',req.pages.invite_email({
+          r = await mail.send(new_user.email,process.env.DOMAIN,req.pages.invite_email({
                           link:  "http://"+process.env.DOMAIN+"/"+req.gbox.id+'.'+new_user.id,
                           name:user.name,
                     }));
