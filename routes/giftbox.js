@@ -81,7 +81,7 @@ exports.create = async function (req,res,next){
          let r = await req.db.collection('giftboxes').insertOne(gbox);
          assert(r.insertedCount,1);
 
-         r = mail.send(user.email,process.env.DOMAIN,req.pages.created_email({
+         r = mail.send(user.email,process.env.DOMAIN,req.pages.onCreation({
                           link: "http://"+process.env.DOMAIN+"/"+gbox.id+'.'+user.id,
                           name: req.body.name,
                 }));

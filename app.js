@@ -21,8 +21,8 @@ const pages = (()=>{
             msg: pug.compileFile('./pages/msg.pug'),
             created: pug.compileFile('./pages/created.pug'),
             not_created: pug.compileFile('./pages/not_created.pug'),
-            invite_email: pug.compileFile('./pages/email/invitation.pug'),
-            created_email: pug.compileFile('./pages/email/creation.pug'),
+            onInvitation: pug.compileFile('./pages/email/onInvitation.pug'),
+            onCreation: pug.compileFile('./pages/email/onCreation.pug'),
         };
    
         return (lang)=>{
@@ -49,7 +49,6 @@ app.use(locale(Object.keys(dictionary),'en'));
 app.use(function (req,res,next){
        req.db = db; 
        req.pages = pages(req.locale); 
-       
        return next();                
 })
 

@@ -82,6 +82,24 @@ exports.ru = {
        "message":"Ошибка",
        "sub_message":"Группа не создана",
     },
+     
+ 
+    "onCreation":{
+         "greeting":"Здравствуйте",
+         "msg":"Вы только что создали новогоднюю группу обмена подарками на manysantas.com! Получите доступ к вашей странице по ссылке ниже, чтобы пригласить участников, а также написать письмо Санте!", 
+         "warning":"Внимание! Данное письмо является единственным способом получения доступа к вашей странице: не удаляйте и не передавайте его никому!",
+         "link_button":"Войти"
+    },
+
+    "onInvitation":{
+
+         "greeting":"Здравствуйте",
+         "msg":"пригласил Вас принять участие в новогоднем обмене подарками на manysantas.com! Проследуйте по ссылке ниже, чтобы принять приглашение и написать письмо Санте!", 
+         "warning":"Внимание! Данное письмо является единственным способом получения доступа к вашей странице: не удаляйте и не передавайте его никому!",
+         "link_button":"Войти"
+
+
+    }
  
    
 
@@ -169,6 +187,26 @@ exports.en = {
        "message":"Error",
        "sub_message":"Giftbox isn't created",
     },
+
+    "onCreation":{
+
+         "greeting":"Hey",
+         "msg":"You just created a giftbox at manysantas.com, follow-up the link below to enter into your page and to invite participants!", 
+         "warning":"Caution: this link is the only way to enter your page, so keep it safe and dont share with anybody!",
+         "link_button":"your page"
+
+
+    },
+
+    "onInvitation":{
+
+         "greeting":"Hey",
+         "msg":"has invited you to take part in a manysantas.com giftbox! Follow up the link to accept invitation and to send a letter to Santa!", 
+         "warning":"Caution: this link is the only way to enter your page, so keep it safe and dont share with anybody!",
+         "link_button":"your page"
+
+
+    }
 
 };
 
