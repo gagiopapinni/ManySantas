@@ -10,26 +10,23 @@ exports.shuffle = async function (req,res,next){
           assert.equal(req.gbox.users[0].receiver_id.length, 0);//refuse if shuffled
           assert.equal(req.user.id[0], '0');
 
-          let users = [],
-              id_pool = [];
-
-          for(let u of req.gbox.users)
-              if(u.name){//only them who accepted invitation
-                users.push(u);
-                id_pool.push(u.id);
-              }
+          let users = req.gbox.users.filter(u=>!!u.name);             
+          
           assert(users.length > 1);
-          req.gbox.users = users;
+          req.gbox.users = users.slice();
 
-          for(let u of users){
+          for(let u of req.gbox.users){
                let found;
                do{
-                   const random_idx = Math.round(Math.random()*(id_pool.length-1));
-                   
-                   found = (u.is != id_pool[random_idx]);
+                   const random_idx = Math.round(Math.random()*(users.length-1));
+
+                   found = (u.id != users[random_idx].id);
+                   if(req.gbox.users.length > 2) 
+                       found = found && ( !users[random_idx].receiver_id || users[random_idx].receiver_id != u.id);
+
                    if(found){
-                      u.receiver_id = id_pool[random_idx];
-                      id_pool.splice(random_idx,1);
+                      u.receiver_id = users[random_idx].id;
+                      users.splice(random_idx,1);
                    }
                }while(!found);
           }
